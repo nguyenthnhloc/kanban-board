@@ -4,7 +4,7 @@ export const paths = {
   screenshots: "/screenshots",
   employees: "/employees",
   projectsTracking: "/projects-tracking",
-  projectTrackingDetail: "/projects-tracking/:name",
+  projectTrackingDetail: "/projects-tracking/:id/:slug",
   teams: "/teams",
   timeAndAttendance: "/time-and-attendance",
   appsAndWebsites: "/apps-and-websites",

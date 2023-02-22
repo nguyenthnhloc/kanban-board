@@ -22,13 +22,17 @@ export default class ProjectStore {
   }
 
   @action createProject(name: string, description?: string) {
-    const slug = name.toLowerCase().replaceAll(" ", "-");
-    this.projects.unshift({ id: uuidV4(), slug, name, description });
+    const id = uuidV4();
+    const slug = `${id}/${name.toLowerCase().replaceAll(" ", "-")}`;
+    this.projects.unshift({ id, slug, name, description });
   }
 
   @action updateProject(project: Project) {
     const found = this.projects.findIndex((value) => value.id === project.id);
-    this.projects.splice(found, 1, project);
+    if (found !== -1) {
+      const slug = `${project.id}/${project.name.toLowerCase().replaceAll(" ", "-")}`;
+      this.projects.splice(found, 1, { ...project, slug });
+    }
   }
 
   @action deleteProject(projectId: string) {

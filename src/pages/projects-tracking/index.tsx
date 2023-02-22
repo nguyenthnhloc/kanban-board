@@ -52,10 +52,24 @@ const ProjectsTracking: FC<Store> = ({ projectStore }) => {
     setOpenProjectModal(false);
   };
 
+  const onOpenUpdateModal = (e: MouseEvent<HTMLLIElement>, project: Project) => {
+    e.stopPropagation();
+    setProject(project);
+    setOpenProjectModal(true);
+    onCloseProjectMenu();
+  };
+
   const onUpdateProject = (values: Project) => {
     projectStore.updateProject(values);
     setProject(undefined);
     setOpenProjectModal(false);
+  };
+
+  const onOpenDeleteModal = (e: MouseEvent<HTMLLIElement>, project: Project) => {
+    e.stopPropagation();
+    setProject(project);
+    setOpenConfirmDeleteModal(true);
+    onCloseProjectMenu();
   };
 
   const onDeleteProject = () => {
@@ -77,7 +91,7 @@ const ProjectsTracking: FC<Store> = ({ projectStore }) => {
       <Grid container spacing={3}>
         {projectStore.projectsList.map((value) => (
           <Grid key={value.id} item xs={12} sm={6} md={6} lg={4} xl={3}>
-            <Card style={{ cursor: "pointer" }}>
+            <Card style={{ cursor: "pointer" }} onClick={() => navigate(`${paths.projectsTracking}/${value.slug}`)}>
               <CardHeader
                 title={value.name}
                 action={
@@ -92,22 +106,10 @@ const ProjectsTracking: FC<Store> = ({ projectStore }) => {
                       anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     >
                       <MenuList>
-                        <MenuItem
-                          onClick={() => {
-                            setProject(value);
-                            setOpenProjectModal(true);
-                            onCloseProjectMenu();
-                          }}
-                        >
+                        <MenuItem onClick={(e) => onOpenUpdateModal(e, value)}>
                           <Edit fontSize="small" /> <Typography mx={1}>Edit</Typography>
                         </MenuItem>
-                        <MenuItem
-                          onClick={() => {
-                            setProject(value);
-                            setOpenConfirmDeleteModal(true);
-                            onCloseProjectMenu();
-                          }}
-                        >
+                        <MenuItem onClick={(e) => onOpenDeleteModal(e, value)}>
                           <Delete fontSize="small" /> <Typography mx={1}>Delete</Typography>
                         </MenuItem>
                       </MenuList>

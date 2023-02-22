@@ -16,7 +16,7 @@ import {
 
 const GeneralLayout: FC<PropsWithChildren> = () => {
   const { pathname } = useLocation();
-  const [, path, id] = pathname.split("/");
+  const [, path,, slug] = pathname.split("/");
   const pageName = pages.find((value) => value.path === `/${path}`);
 
   const renderMenuItem = () => {
@@ -56,9 +56,9 @@ const GeneralLayout: FC<PropsWithChildren> = () => {
               <Link to={pageName.path} style={{ color: "inherit", fontSize: 14, textDecoration: "none" }}>
                 {pageName.name}
               </Link>
-              {id && (
-                <Typography color="text.primary" fontSize={14}>
-                  {id}
+              {slug && (
+                <Typography color="text.primary" fontSize={14} textTransform="capitalize">
+                  {slug.replaceAll("-", " ")}
                 </Typography>
               )}
             </Breadcrumbs>
