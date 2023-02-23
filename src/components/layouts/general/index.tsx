@@ -16,7 +16,7 @@ import {
 
 const GeneralLayout: FC<PropsWithChildren> = () => {
   const { pathname } = useLocation();
-  const [, path,, slug] = pathname.split("/");
+  const [, path, , slug] = pathname.split("/");
   const pageName = pages.find((value) => value.path === `/${path}`);
 
   const renderMenuItem = () => {
@@ -50,14 +50,14 @@ const GeneralLayout: FC<PropsWithChildren> = () => {
         </Stack>
       </StyledSidebar>
       <StyledContent>
-        <Stack px={3} py={2} direction="row" justifyContent="space-between">
+        <Stack px={3} py={2} direction="row" alignItems="center" justifyContent="space-between">
           {pageName && (
             <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNext fontSize="small" />}>
-              <Link to={pageName.path} style={{ color: "inherit", fontSize: 14, textDecoration: "none" }}>
+              <Link to={pageName.path} style={{ color: "inherit", textDecoration: "none" }}>
                 {pageName.name}
               </Link>
               {slug && (
-                <Typography color="text.primary" fontSize={14} textTransform="capitalize">
+                <Typography color="text.primary" fontWeight={700} textTransform="capitalize">
                   {slug.replaceAll("-", " ")}
                 </Typography>
               )}
@@ -68,19 +68,19 @@ const GeneralLayout: FC<PropsWithChildren> = () => {
               <NotificationsNone />
             </StyledNotificationButton>
             <StyledCalendarButton spacing={1} direction="row" alignItems="center" justifyContent="center">
-              <DateRange style={{ color: "#707F92" }} />
+              <DateRange color="action" />
               <StyledCalendarButtonTitle>
-                <Typography color="#707F92" fontSize={12} fontWeight={500}>
+                <Typography color="text.secondary" fontSize={12} fontWeight={500}>
                   Total Time
                 </Typography>
-                <Typography color="#707F92" fontSize={10}>
+                <Typography color="text.secondary" fontSize={10}>
                   Calendar is not available
                 </Typography>
               </StyledCalendarButtonTitle>
             </StyledCalendarButton>
           </Stack>
         </Stack>
-        <Stack p={3}>
+        <Stack p={3} minHeight="calc(100vh - 80px)">
           <Outlet />
         </Stack>
       </StyledContent>

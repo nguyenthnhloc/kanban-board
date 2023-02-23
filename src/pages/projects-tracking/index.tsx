@@ -82,7 +82,7 @@ const ProjectsTracking: FC<Store> = ({ projectStore }) => {
     <Stack>
       <Stack mb={2} height={40} direction="row">
         <Button color="primary" variant="outlined" onClick={() => setOpenProjectModal(true)}>
-          <Typography fontWeight={600} textTransform="capitalize">
+          <Typography fontWeight={600}>
             Add New Project
           </Typography>
         </Button>
@@ -139,7 +139,7 @@ const ProjectsTracking: FC<Store> = ({ projectStore }) => {
         onSubmit={onDeleteProject}
       >
         <Typography textAlign="center">
-          By deleting "<strong>{project?.name}</strong>" project, all task inside that project will also be deleted.
+          By deleting "<strong>{project?.name}</strong>" project, all tasks inside that project will also be deleted.
         </Typography>
       </ConfirmModal>
     </Stack>

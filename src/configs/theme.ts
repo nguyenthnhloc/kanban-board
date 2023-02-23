@@ -3,11 +3,20 @@ import { createTheme } from "@mui/material/styles";
 // A custom theme for this app
 const theme = createTheme({
   palette: {
+    info: {
+      main: "#349EEB",
+    },
     error: {
       main: "#ff4d4f",
     },
+    success: {
+      main: "#1CAB8A",
+    },
     primary: {
       main: "#695EEE",
+    },
+    text: {
+      secondary: "#707F92",
     },
   },
   typography: {
