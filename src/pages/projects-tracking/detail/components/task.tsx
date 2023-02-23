@@ -1,13 +1,12 @@
 import { FC, useState } from "react";
 import moment from "moment";
 import { inject, observer } from "mobx-react";
-import { Grid, Typography } from "@mui/material";
+import { Stack, Avatar, Chip, Grid, Typography } from "@mui/material";
 
+import { Store } from "store";
 import { Project, ProjectTask, ProjectColumn } from "store/project";
 
 import TaskDrawer from "./task-drawer";
-import { Store } from "store";
-import { Tag } from "@mui/icons-material";
 
 type TaskProps = Store & {
   task: ProjectTask;
@@ -29,8 +28,25 @@ const Task: FC<TaskProps> = ({ task, columns, project, projectStore }) => {
   return (
     <div style={{ width: "100%", cursor: "move", marginBottom: 10 }}>
       <Grid p={2} item bgcolor="white" borderRadius={1} onClick={() => setOpenTaskDrawer(true)}>
-        <Typography style={{ wordWrap: "break-word" }}>{task.title}</Typography>
-        <Tag>Due data: {moment(task.dueDate).format("DD MMM")}</Tag>
+        <Typography mb={1} style={{ wordWrap: "break-word" }} fontWeight={600}>
+          {task.title}
+        </Typography>
+        {task.dueDate && (
+          <Chip
+            size="small"
+            color="primary"
+            label={
+              <Typography fontSize={12}>
+                Due date: <strong>{moment(task.dueDate).format("DD MMM")}</strong>
+              </Typography>
+            }
+          />
+        )}
+        {task.assignTo && (
+          <Stack mt={1}>
+            <Avatar style={{ width: 25, height: 25 }}>{task.assignTo[0]}</Avatar>
+          </Stack>
+        )}
       </Grid>
 
       {openTaskDrawer && (
