@@ -172,6 +172,6 @@ export default class ProjectStore {
     const tasks = column.tasks;
     const toTasks = toColumn.tasks;
     const [removed] = tasks.splice(startIndex, 1);
-    toTasks.splice(endIndex, 0, removed);
+    toTasks.splice(endIndex, 0, { ...removed, column: toColumn.id });
   }
 }
