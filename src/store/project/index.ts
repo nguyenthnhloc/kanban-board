@@ -124,6 +124,7 @@ export default class ProjectStore {
       const column = found?.columns?.find((value) => value.id === columnId);
       const toColumn = found?.columns?.find((value) => value.id === task.column);
       const taskIndex = column?.tasks?.findIndex((value) => value.id === task.id);
+      console.log("🚀 ~ file: index.ts:127 ~ ProjectStore ~ @actionupdateProjectColumnTask ~ taskIndex:", taskIndex, task)
 
       if (column?.id !== toColumn?.id) {
         const tasks = column?.tasks;

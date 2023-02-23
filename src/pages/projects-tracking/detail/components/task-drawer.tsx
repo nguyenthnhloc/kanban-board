@@ -1,5 +1,6 @@
-import { FC, FormEvent, useEffect, useState } from "react";
+import { FC, FormEvent, useState } from "react";
 import styled from "@emotion/styled";
+import { cloneDeep } from "lodash";
 import {
   Button,
   Drawer,
@@ -47,12 +48,8 @@ const TaskDrawer: FC<TaskDrawerProps> = ({
   onDeleteTask,
 }) => {
   const [errors, setErrors] = useState<TaskFormValues>({ title: "", column: "" });
-  const [values, setValues] = useState<TaskFormValues>({ title: "", column: "" });
+  const [values, setValues] = useState<TaskFormValues>({ title: "", column: "", ...cloneDeep(task) });
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false);
-
-  useEffect(() => {
-    setValues({ ...task });
-  }, [task]);
 
   const onFormSubmitted = (e: FormEvent) => {
     e.preventDefault();
@@ -155,6 +152,7 @@ const TaskDrawer: FC<TaskDrawerProps> = ({
               </FormLabel>
               <RadioGroup
                 row
+                value={values.prioritize}
                 onChange={(e) =>
                   setValues((prev) => ({ ...prev, prioritize: e.target.value as ProjectTask["prioritize"] }))
                 }
